@@ -1,0 +1,41 @@
+{
+    "name": "canmodule/infocms",
+    "type": "project",
+    "keywords": [
+        "php",
+        "application",
+        "infocms",
+        "user",
+        "permission",
+        "role",
+        "resource"
+    ],
+    "description": "A application of infocms",
+    "license": "MIT",
+    "require": {
+        "php": "^7.3.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "ModuleInfocms\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ModuleInfocms\\Test\\": "./test/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": [],
+    "scripts": {
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
+    }
+}
