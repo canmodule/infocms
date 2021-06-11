@@ -65,4 +65,37 @@ class PetRepository extends AbstractRepository
             1 => '主分类',
         ];
     }
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    /*public function model()
+    {
+        return Pet::class;
+    }*/
+
+    /**
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
+    /*public function validator()
+    {
+        return PetValidator::class;
+    }*/
+
+    /**
+     * Boot up the repository, pushing criteria
+     */
+    /*public function boot()
+    {
+        $this->pushCriteria(app(RequestCriteria::class));
+    }*/
+
+    /*public function presenter()
+    {
+        return PetPresenter::class;
+    }*/
 }

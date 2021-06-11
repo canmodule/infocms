@@ -15,12 +15,7 @@ class Attachment extends AbstractModel
 
     public function getUrlAttribute()
     {
-        $domain = $this->getUploadUrl();
-        return rtrim($domain, '/') . '/' . $this->filepath;
-    }
-
-    protected function getUploadUrl()
-    {
-        return config('app.uploadUrl');
+        $domain = $this->resource->getPointDomain('uploadUrl');
+        return $domain . $this->filepath;
     }
 }

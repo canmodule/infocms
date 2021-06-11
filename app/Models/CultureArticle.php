@@ -6,7 +6,17 @@ namespace ModuleInfocms\Models;
 
 class CultureArticle extends AbstractModel
 {
-    //protected $table = '';
+    protected $table = 'culture_article';
     protected $fillable = ['name', 'content'];
 
+    public function cultureCategory()
+    {
+        return $this->hasOne('ModuleInfocms\Models\CultureCategory', 'code', 'category_code');
+    }
+
+    public function getUrl()
+    {
+        $url = $this->resource->getPointDomain('cultureDomain') . 'show-' . $this->id;
+        return $url;
+    }
 }

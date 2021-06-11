@@ -51,4 +51,9 @@ class CultureArticleRepository extends AbstractRepository
             //'signin_num' => ['width' => '60'],
         ];
     }
+
+    public function model()
+    {
+        return \ModuleInfocms\Models\CultureArticle::class;
+    }
 }

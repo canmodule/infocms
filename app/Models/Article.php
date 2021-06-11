@@ -6,7 +6,7 @@ namespace ModuleInfocms\Models;
 
 class Article extends AbstractModel
 {
-    //protected $table = '';
+    protected $table = 'article';
     protected $fillable = ['name'];
 
 }
