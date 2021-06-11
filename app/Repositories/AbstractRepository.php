@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Repositories;
 
-use FrameworkBaseapp\Repositories\AbstractRepository as AbstractRepositoryBase;
+use Framework\Baseapp\Repositories\AbstractRepository as AbstractRepositoryBase;
 
 /**
  * Class AbstractRepository

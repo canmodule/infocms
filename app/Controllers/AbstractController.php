@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Controllers;
 
-use FrameworkBaseapp\Controllers\AbstractController as AbstractControllerBase;
+use Framework\Baseapp\Controllers\AbstractController as AbstractControllerBase;
 
 abstract class AbstractController extends AbstractControllerBase
 {
