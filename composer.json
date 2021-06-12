@@ -1,5 +1,5 @@
 {
-    "name": "canmodule/infocms",
+    "name": "candocker/infocms",
     "type": "project",
     "keywords": [
         "php",
@@ -31,11 +31,5 @@
     "prefer-stable": true,
     "extra": [],
     "scripts": {
-    },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer/"
-        }
     }
 }
