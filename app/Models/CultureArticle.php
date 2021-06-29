@@ -16,7 +16,7 @@ class CultureArticle extends AbstractModel
 
     public function getUrl()
     {
-        $url = $this->resource->getPointDomain('cultureDomain') . 'show-' . $this->id;
+        $url = $this->getResource()->getPointDomain('cultureDomain') . 'show-' . $this->id;
         return $url;
     }
 }
