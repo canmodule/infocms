@@ -16,7 +16,7 @@ class CultureCategory extends AbstractModel
 
     public function getUrl()
     {
-        $url = $this->resource->getPointDomain('cultureDomain') . 'list/' . $this->code;
+        $url = $this->getResource()->getPointDomain('cultureDomain') . 'list/' . $this->code;
         return $url;
     }
 }

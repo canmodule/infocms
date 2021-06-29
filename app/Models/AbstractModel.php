@@ -13,14 +13,14 @@ class AbstractModel extends AbstractModelBase
     public function formatContent()
     {
         $content = $this->getOriginal('content');
-        $domain = $this->resource->getPointDomain('uploadUrl');
+        $domain = $this->getResource()->getPointDomain('uploadUrl');
         $content = str_replace('src="upload', 'src="' . $domain . 'upload', $content);
         return $content;
     }
 
     public function getSingleAttachment($field)
     {
-        $attachment = $this->getPointModel('attachment');
+        $attachment = $this->getModelObj('attachment');
         $where = [
             'info_field' => $field,
             'info_id' => $this->id,
@@ -41,7 +41,7 @@ class AbstractModel extends AbstractModelBase
 
     public function getMulAttachment($field)
     {
-        $attachment = $this->getPointModel('attachment');
+        $attachment = $this->getModelObj('attachment');
         $where = [
             'info_field' => $field,
             'info_id' => $this->id,
