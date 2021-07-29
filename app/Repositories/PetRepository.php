@@ -58,7 +58,7 @@ class PetRepository extends AbstractRepository
         ];
     }
 
-    protected function _is_masterKeyDatas()
+    protected function _isMasterKeyDatas()
     {
         return [
             0 => '普通分类',

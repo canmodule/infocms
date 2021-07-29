@@ -61,7 +61,7 @@ class AttributeRepository extends AbstractRepository
         ];
     }
 
-    protected function _is_skuKeyDatas()
+    protected function _isSkuKeyDatas()
     {
         return [
             0 => '非SKU',
@@ -69,7 +69,7 @@ class AttributeRepository extends AbstractRepository
         ];
     }
 
-    protected function _sku_fieldKeyDatas()
+    protected function _skuFieldKeyDatas()
     {
         return [
             'skuv1' => 'SKUV-1',
