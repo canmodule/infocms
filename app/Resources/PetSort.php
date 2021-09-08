@@ -2,8 +2,6 @@
 
 namespace ModuleInfocms\Resources;
 
-use Framework\Baseapp\Resources\AbstractResource;
-
 class PetSort extends AbstractResource
 {
 }
