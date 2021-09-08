@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class AttributeValueRequest extends AbstractRequest
+class RubbingRequest extends AbstractRequest
 {
     protected function _updateRule()
     {

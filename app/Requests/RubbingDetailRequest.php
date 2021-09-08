@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class WebsiteGoodsRequest extends AbstractRequest
+class RubbingDetailRequest extends AbstractRequest
 {
     protected function _updateRule()
     {

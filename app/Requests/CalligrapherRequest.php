@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class GoodsAttributeRequest extends AbstractRequest
+class CalligrapherRequest extends AbstractRequest
 {
     protected function _updateRule()
     {

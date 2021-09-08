@@ -1,10 +1,21 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace ModuleInfocms\Repositories;
 
-class WebsiteGoodsRepository extends AbstractRepository
+class RubbingDetailRepository extends AbstractRepository
 {
+    protected function _sceneFields()
+    {
+        return [
+            'list' => ['id', 'name'],
+            'listSearch' => ['id', 'name'],
+            'add' => ['name'],
+            'update' => ['name'],
+        ];
+    }
+
     public function getShowFields()
     {
         return [
@@ -23,16 +34,6 @@ class WebsiteGoodsRepository extends AbstractRepository
     {
         return [
             //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
-        ];
-    }
-
-    protected function _sceneFields()
-    {
-        return [
-            'list' => ['id', 'name'],
-            'listSearch' => ['id', 'name'],
-            'add' => ['name'],
-            'update' => ['name'],
         ];
     }
 
