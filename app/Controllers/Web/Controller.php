@@ -2,6 +2,9 @@
 
 namespace ModuleInfocms\Controllers\Web;
 
+use Illuminate\Support\Facades\View;
+use Illuminate\View\FileViewFinder;
+use Illuminate\Support\Facades\App;
 use ModuleInfocms\Controllers\AbstractController;
 
 class Controller extends AbstractController
@@ -41,5 +44,35 @@ class Controller extends AbstractController
             'info' => $info,
         ];
         return $this->customView($view, $datas);
+    }
+
+    public function isMobile()
+    {
+return false;
+        //return AgentTool::isMobile();
+    }
+
+    protected function customView($view, $datas = [], $viewPath = null)
+    {
+        $viewPath = is_null($viewPath) ? $this->viewPath() : $viewPath;
+        $view = $viewPath . '.' . $view;
+        $viewPre = $this->viewPre();
+        $datas = array_merge([
+            'title' => 'title',
+            'keywords' => 'keywords',
+            'description' => 'description'
+        ], $datas);
+        return view($view, ['datas' => $datas]);
+    }
+
+    protected function viewPre()
+    {
+        View::addLocation(app_path().'/views');
+        $path = $this->isMobile() ? 'mobile' : 'pc';
+        //$path = 'mobile';
+
+        $paths = [resource_path('views') . '/' . $path];
+        $finder =new FileViewFinder(App::make ('files'), $paths);
+        View::setFinder ($finder);
     }
 }
