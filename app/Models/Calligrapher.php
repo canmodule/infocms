@@ -7,6 +7,6 @@ namespace ModuleInfocms\Models;
 class Calligrapher extends AbstractModel
 {
     protected $table = 'calligrapher';
-    //protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
 }

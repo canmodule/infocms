@@ -7,4 +7,9 @@ use Framework\Baseapp\Services\AbstractService as AbstractServiceBase;
 
 class AbstractService extends AbstractServiceBase
 {
+    protected function getAppcode()
+    {
+        return 'infocms';
+    }
+
 }

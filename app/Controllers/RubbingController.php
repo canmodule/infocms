@@ -6,4 +6,10 @@ namespace ModuleInfocms\Controllers;
 
 class RubbingController extends AbstractController
 {
+    public function dealCalligrapher()
+    {
+        $service = $this->getServiceObj('rubbing');
+        //$service->dealCalligrapher();
+        $service->dealRubbingDetails();
+    }
 }

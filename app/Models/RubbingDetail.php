@@ -7,6 +7,7 @@ namespace ModuleInfocms\Models;
 class RubbingDetail extends AbstractModel
 {
     protected $table = 'rubbing_detail';
-    //protected $guarded = ['id'];
+    protected $guarded = ['id'];
+    public $timestamps = false;
 
 }
