@@ -14,6 +14,7 @@ class AbstractRepository extends AbstractRepositoryBase
     {
         return [
             'seal' => '篆',
+            'a' => '',
             'offical' => '隶',
             'cursive' => '草',
             'running' => '行',
@@ -28,12 +29,15 @@ class AbstractRepository extends AbstractRepositoryBase
             'qinhan' => '秦汉',
             'weijin' => '魏晋南北朝',
             'suitang' => '隋唐五代',
+            'b' => '',
             'songlj' => '宋辽金',
             'yuan' => '元',
             'ming' => '明',
             'qing' => '清',
             'modern' => '近现代',
             'contemporary' => '当代',
+            'union' => '合辑',
+
         ];
     }
 
