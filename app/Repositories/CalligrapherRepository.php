@@ -9,8 +9,8 @@ class CalligrapherRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'name'],
-            'listSearch' => ['id', 'name'],
+            'list' => ['id', 'code', 'name', 'thumb', 'title', 'dynasty', 'nickname', 'name_full', 'description', 'orderlist', 'birthday', 'deathday', 'status', 'created_at'],
+            'listSearch' => ['id', 'name', 'dynasty'],
             'add' => ['name'],
             'update' => ['name'],
         ];
@@ -19,13 +19,15 @@ class CalligrapherRepository extends AbstractRepository
     public function getShowFields()
     {
         return [
-            //'type' => ['valueType' => 'key'],
+            'dynasty' => ['valueType' => 'key'],
+            'thumb' => ['valueType' => 'callback', 'method' => 'tmpThumb', 'showType' => 'common'],
         ];
     }
 
     public function getSearchFields()
     {
         return [
+            'dynasty' => ['type' => 'select'],
             //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
         ];
     }

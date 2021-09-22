@@ -45,4 +45,18 @@ class AbstractRepository extends AbstractRepositoryBase
     {
         return 'infocms';
     }
+
+    public function tmpThumb($model, $field = '', $pointField = 'extfield')
+    {
+        $url = $model->$pointField;
+        $url = strpos($url, 'htt') !== false ? $url : 'https://zsbt-1254153797.cos.ap-shanghai.myqcloud.com/' . $url;
+        if (strpos($url, '?') !== false) {
+            $url = substr($url, 0, strpos($url, '?'));
+        }
+        if ($field == 'url') {
+            return $url;
+        }
+
+        return "<a href='{$url}' target='_blank'><img src='{$url}' width='150px' height='150px' /></a>";
+    }
 }

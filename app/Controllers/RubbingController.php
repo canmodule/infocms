@@ -11,6 +11,9 @@ class RubbingController extends AbstractController
         $service = $this->getServiceObj('rubbing');
         //$service->dealCalligrapher();
         //$service->dealRubbing();
-        $service->dealRubbingDetails();
+        //$service->dealRubbingDetails();
+        $rubbingId = $this->request->input('rubbing_id');
+        //$service->checkDetail($rubbingId);
+        $service->downRubbing();
     }
 }

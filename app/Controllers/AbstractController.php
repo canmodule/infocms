@@ -18,31 +18,6 @@ abstract class AbstractController extends AbstractControllerBase
         return 'infocms';
     }
 
-	protected function customView($view, $datas = [], $viewPath = null)
-	{
-		$viewPath = is_null($viewPath) ? $this->viewPath() : $viewPath;
-		$view = $viewPath . '.' . $view;
-		$viewPre = $this->viewPre();
-		$datas = array_merge([
-			'title' => 'title',
-			'keywords' => 'keywords',
-			'description' => 'description'
-		], $datas);
-		return view($view, ['datas' => $datas]);
-	}
-
-	protected function viewPre()
-	{
-		View::addLocation(app_path().'/views');
-		$path = $this->resource->isMobile() === null ? '' : ($this->resource->isMobile() ? 'mobile' : 'pc');
-        $path = resource_path('views') . '/' . $path;
-		//$path = 'mobile';
-
-        $paths = [$path, app_path() . '/views'];
-		$finder =new FileViewFinder(App::make ('files'), $paths);
-		View::setFinder ($finder);
-	}
-
     /*public function getCurrentUser()
     {
         static $data;

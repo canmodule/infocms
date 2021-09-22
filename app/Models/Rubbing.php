@@ -9,4 +9,8 @@ class Rubbing extends AbstractModel
     protected $table = 'rubbing';
     protected $guarded = ['id'];
 
+    public function calligrapher()
+    {
+        return $this->hasOne(Calligrapher::class, 'code', 'calligrapher_code');
+    }
 }

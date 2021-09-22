@@ -52,23 +52,24 @@ return false;
         //return AgentTool::isMobile();
     }
 
-    protected function customView($view, $datas = [], $viewPath = null)
-    {
-        $viewPath = is_null($viewPath) ? $this->viewPath() : $viewPath;
-        $view = $viewPath . '.' . $view;
-        $viewPre = $this->viewPre();
-        $datas = array_merge([
-            'title' => 'title',
-            'keywords' => 'keywords',
-            'description' => 'description'
-        ], $datas);
-        return view($view, ['datas' => $datas]);
-    }
+	protected function customView($view, $datas = [], $viewPath = null)
+	{
+		$viewPath = is_null($viewPath) ? $this->viewPath() : $viewPath;
+		$view = $viewPath . '.' . $view;
+		$viewPre = $this->viewPre();
+		$datas = array_merge([
+			'title' => 'title',
+			'keywords' => 'keywords',
+			'description' => 'description'
+		], $datas);
+		return view($view, ['datas' => $datas]);
+	}
 
     protected function viewPre()
     {
         View::addLocation(app_path().'/views');
-        $path = $this->isMobile() ? 'mobile' : 'pc';
+        $mobile = $this->isMobile();
+        $path = is_null($mobile) ? '' : ($mobile ? 'mobile' : 'pc');
         //$path = 'mobile';
 
         $paths = [resource_path('views') . '/' . $path];
