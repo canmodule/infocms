@@ -6,62 +6,81 @@ class ToolController extends Controller
 {
     public function tool()
     {
-        return $this->customView('toolbar/index');
-    }
+		$where = [];
 
-    public function listinfo($code = '', $page = 1)
-    {
-        $category = empty($code) ? ['parent_code' => '', 'name' => '书法欣赏', 'code' => null] : $this->getModelObj('cultureCategory')->where(['code' => $code])->first();
-        $repository = $this->getRepositoryObj('cultureArticle');
-        $lists = $repository->paginate(null, ['*']);
-        //print_R($info);
+		$sort = $this->request->input('sort');
+		$sort = str_replace('_', '', $sort);
+
+		$sortModel = $this->getPointModel('toolsort-promotion');
+        $sorts = $sortModel->getGroupInfos();
+
+		$sortData = $sortModel->getInfo($sort, 'code');
+        if (empty($sortData)) {
+            $pCode = '';
+            $subInfos = $sorts['yunying']['subInfos'];
+        } else {
+            $pCode = $sortData['parent_code'] == '' ? $sort : $sortData['parent_code'];
+            $subInfos = $sorts[$pCode]['subInfos'];
+            $where['sort_code'] = $sortData['parent_code'] == '' ? array_keys($subInfos) : $sort;
+        }
+        
+
         $datas = [
-            'view' => 'list',
-            'title' => '列表',
-            'description' => '描述',
-            'keyword' => 'tag',
-            'lists' => $lists,
-            'currentCategory' => $category,
+            'sort' => $sort,
+            'pCode' => $pCode,
+		    'sortCodes' => empty($sortCodes) ? null : $sortCodes,
+            'sortData' => $sortData,
+            'subInfos' => $subInfos,
+            'sorts' => $sorts,
         ];
-        return $this->customView('list', $datas);
+
+		//$dataTdk = ['{{TAGSTR}}' => $sortData['name']];
+		$this->pagesysInfo['tdkData'] = ['{{TAGSTR}}' => isset($sortData['name']) ? $sortData['name'] : 'Web线上资源'];
+
+		return $this->render('index', $datas);
+
+
+
+
+        $key = 'toolbar-datas';
+        $redis = $this->getServiceObj('redis');
+        $datas = $redis->get($key, true);
+        if (empty($datas)) {
+            $datas = $this->getToolDatas();
+            $redis->set($key, $datas);
+        }
+        //print_r($datas);exit();
+        return $this->customView('toolbar/index', ['datas' => $datas]);
     }
 
-    public function show($id)
+    protected function getToolDatas()
     {
-        return $this->_showCommon($id, 'show', 'cultureArticle', 'infocms');
+        echo 'sssssssssssss';
+
+        $sortModel = $this->getModelObj('bench-toolsort');
+        $toolModel = $this->getModelObj('bench-toolbar');
+        $firstSorts = $sortModel->where('parent_code', '')->get();
+        $datas = [];
+        foreach ($firstSorts as $fSort) {
+            $fCode = $fSort['code'];
+            $datas[$fCode] = $fSort->toArray();
+            $subInfos = [];
+            $subDatas = $sortModel->where('parent_code', $fCode)->get();
+            foreach ($subDatas as $subData) {
+                $sCode = $subData['code'];
+                $subInfos[$sCode] = $subData->toArray();
+                $tools = $toolModel->where(['sort' => $sCode])->get();
+                $toolDatas = [];
+                foreach ($tools as $tool) {
+                    $toolDatas[$tool['code']] = $tool->toArray();
+                }
+                $subInfos[$sCode]['tools'] = $toolDatas;
+            }
+            $datas[$fCode]['subInfos'] = $subInfos;
+        }
+
+        return $datas;
     }
-
-	public function test()
-	{
-		$str = '';
-		$domains = [
-			'culture' => 'http://culture.91zuiai.com', 
-			'pet' => 'http://pet.91zuiai.com', 
-            'subject' => 'http://subject-test.91zuiai.com',
-            'brand' => 'http://brand-test.91zuiai.com',
-			'guide' => 'http://guide.91zuiai.com',
-            'human' => 'http://human-test.91zuiai.com',
-		];
-
-		$routes = [
-			'culture' => ['/', '/listinfo', '/show-1'],
-			'pet' => ['/', '/info-show-1', '/info-list', '/info-home', '/pet-home', '/pet-list', '/pet-show-1', '/special-list', '/special-show-1'],
-			'subject' => ['/', '/human', '/info', '/knowledge', '/league', '/product', '/shop', '/store'],
-			'brand' => ['/', '/detail', '/product', '/shop', '/store'],
-			'guide' => ['/', '/show-human-1', '/show-info-1', '/show-knowledge-1', '/show-league-1', '/show-shop-1', '/show-store-1', '/vote'],
-			'human' => ['/', '/404', '/about', '/blog', '/contact', '/elements', '/gallery', '/home_alternative', '/page_alternative', '/portfolio', '/portfolio_item', '/portfolio_item_2', '/register', '/services', '/single_post', '/resume'],
-		];
-
-		foreach (['culture', 'pet', 'subject', 'brand', 'guide', 'human'] as $elem) {
-			$domain = $domains[$elem];
-			foreach ($routes[$elem] as $route) {
-				$url = $domain . $route;
-				$str .= "<a href='{$url}' target='_blank'>{$url}</a><br />";
-			}
-		}
-        //echo "<img src='http://api.91zuiai.com/captcha' />";
-		echo $str;
-	}
 
 	protected function viewPath()
 	{

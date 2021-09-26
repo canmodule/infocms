@@ -7,6 +7,33 @@ use Swoolecan\Foundation\Helpers\CommonTool;
 
 trait TraitRubbingService
 {
+    public function downWord()
+    {
+        $repository = $this->getRepositoryObj('rubbing');
+        //$basePath = '/data/htmlwww/filesys/rubbings';
+        $basePath = '/data/wwwroot/happy-writing/public/docs/d/sql1';
+        $rId = 91;
+        $words = $this->getModelObj('rubbingWord')->where('rubbing_id', 0)->orderBy('extfield2')->orderBy('extfield3')->limit(60000)->update(['rubbing_id' => $rId]);
+        $words = $this->getModelObj('rubbingWord')->where('rubbing_id', $rId)->get();
+        $command = $down = '';
+        $paths = [];
+        foreach ($words as $word) {
+            $info = $this->getRubbing($word['extfield2']);
+            $path = $basePath . "/{$info['calligrapher_code']}/{$info['code']}/word/{$word['extfield3']}";
+            if (!in_array($path, $paths)) {
+                $paths[] = $path;
+                $command .= "mkdir {$path} -p \n";
+            }
+            $remoteUrl = $repository->tmpThumb($word, 'url');
+            $ext = pathinfo($remoteUrl, PATHINFO_EXTENSION);
+            $file = $path . "/{$word['orderlist']}-{$word['id']}.{$ext}";
+            $down .= "wget -O {$file} {$remoteUrl} \n";
+        }
+        file_put_contents('/tmp/command', $command);
+        file_put_contents('/tmp/remote', $down);
+        exit();
+    }
+
     public function downRubbing()
     {
         $infos = $this->getModelObj('rubbingDetail')->where('rubbing_id', 0)->get();
@@ -322,5 +349,40 @@ trait TraitRubbingService
             }
             $rubbingId += 1;
         }
+    }
+
+    public function dealRubbingAddWords()
+    {
+        $driver = \Storage::disk('local');
+        $files = $driver->files('e');
+        $excelService = $this->getServiceObj('passport-excel');
+        $fields = ['extfield4', 'word', 'orderlist', 'extfield3', 'detail_id', 'extfield'];
+        $wordModel = $this->getModelObj('rubbingWord');
+        foreach ($files as $file) {
+            $fullFile = $driver->getAdapter()->applyPathPrefix($file);
+            $datas = $excelService->excelDatas($fullFile);
+            foreach ($datas as $data) {
+                $newData = [];
+                foreach ($fields as $key => $field) {
+                    $newData[$field] = $data[$key];
+                }
+                //print_r($newData);
+                $wordModel->create($newData);
+            }
+        }
+    }
+
+    protected function getRubbing($id)
+    {
+        static $rubbings;
+        if (isset($rubbings[$id])) {
+            return $rubbings[$id];
+        }
+        $rubbing = $this->getModelObj('rubbing')->where('extfield2', $id)->first();
+        if (empty($rubbing)) {
+            $rubbing = ['calligrapher_code' => 'weizhi', 'code' => $id];
+        }
+        $rubbings[$id] = $rubbing;
+        return $rubbing;
     }
 }

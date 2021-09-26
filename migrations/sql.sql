@@ -1,3 +1,14 @@
+UPDATE `wp_rubbing_word` AS `w`, `wp_rubbing_detail` AS `d` SET `w`.`extfied2` = `d`.`extfied2` WHERE `w`.`extfield2` = 0 AND`w`.`extfied3` = `d`.`extfield3`;
+
+INSERT INTO `wp_rubbing_word` (`name`, `word`, `orderlist`, `word_simple`, `spell`, `word_traditional`, `word_variant`, `description`, `created_at`, `updated_at`, `extfield`, `extfield2`, `extfield3`, `extfield4`) 
+SELECT `pic_file_name`, `word_name`, `sort`, `simple_word`, `pinyin`, `traditional_word`, `variant_word`, `explain_word`, FROM_UNIXTIME(`create_time`), FROM_UNIXTIME(`update_time`), `pic`, `rubbing_id`, `page_id`, `id` FROM `wp_rubbing_wordbak`;
+
+
+UPDATE `wp_rubbing_detail` AS `d`, `wp_rubbing_detailfull` AS `df` SET `d`.`extfield3` = `df`.`browse_num` WHERE `df`.`browse_num` > 0 AND `d`.`extfield` = `df`.`pic` AND `d`.`extfield2` = `df`.`rubbing_id` ;
+UPDATE `wp_rubbing_detail` AS `d`, `wp_rubbing_detailfull` AS `df` SET `d`.`extfield3` = `df`.`id` WHERE `df`.`browse_num` = 0 AND `df`.`rubbing_id` != 649 AND `d`.`extfield` = `df`.`pic` AND `d`.`extfield2` = `df`.`rubbing_id` ;
+
+
+
 SELECT * FROM `wp_rubbing` AS `r`, (SELECT `rubbing_id`, COUNT(*) AS `count` FROM `wp_rubbing_detail` GROUP BY `rubbing_id`) AS `rd` WHERE `r`.`id` = `rd`.`rubbing_id` ;
 UPDATE `wp_rubbing` AS `r`, (SELECT `rubbing_id`, COUNT(*) AS `count` FROM `wp_rubbing_detail` GROUP BY `rubbing_id`) AS `rd` SET `r`.`status` = `rd`.`count` WHERE `r`.`extfield2` = `rd`.`rubbing_id` ;
 
@@ -15,24 +26,3 @@ SELECT `pic_file_name`, `sort`, `words_num`, `wide`, `high`, `is_original`, `pic
 
 UPDATE `wp_rubbing` AS `r`, `wp_rubbing_detail` AS `rd` SET `rd`.`rubbing_id` = `r`.`id`, `rd`.`created_at` = `r`.`created_at`, `rd`.`updated_at` = `r`.`updated_at` WHERE `r`.`extfield2` = `rd`.`extfield2`;
 
-
-CREATE TABLE `wp_rubbing_detail` (
-      `id` int(11) NOT NULL COMMENT 'ID',
-      `rubbing_id` int(11) NOT NULL DEFAULT '0' COMMENT '碑帖ID',
-      `name` varchar(255) NOT NULL DEFAULT '' COMMENT '图片名称',
-      `orderlist` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-      `word_number` int(11) DEFAULT '0' COMMENT '字数',
-      `width` int(11) DEFAULT NULL COMMENT '宽',
-      `height` int(11) DEFAULT NULL COMMENT '高',
-      `is_original` tinyint(1) DEFAULT '0' COMMENT '是否原图',
-  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-      `extfield` varchar(255) DEFAULT NULL COMMENT '附加字段',
-      `extfield2` varchar(255) DEFAULT NULL COMMENT '附加字段2'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '碑帖详情';
-ALTER TABLE `wp_rubbing_detail`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `rubbing_id` (`rubbing_id`),
-  ADD KEY `sort` (`sort`);
-ALTER TABLE `wp_rubbing_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
