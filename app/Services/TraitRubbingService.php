@@ -12,8 +12,8 @@ trait TraitRubbingService
         $repository = $this->getRepositoryObj('rubbing');
         //$basePath = '/data/htmlwww/filesys/rubbings';
         $basePath = '/data/wwwroot/happy-writing/public/docs/d/sql1';
-        $rId = 91;
-        $words = $this->getModelObj('rubbingWord')->where('rubbing_id', 0)->orderBy('extfield2')->orderBy('extfield3')->limit(60000)->update(['rubbing_id' => $rId]);
+        $rId = 999;
+        $words = $this->getModelObj('rubbingWord')->where('extfield5', 1)->orderBy('extfield2')->orderBy('extfield3')->limit(60000)->update(['rubbing_id' => $rId]);
         $words = $this->getModelObj('rubbingWord')->where('rubbing_id', $rId)->get();
         $command = $down = '';
         $paths = [];

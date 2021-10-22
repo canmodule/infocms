@@ -6,10 +6,10 @@ use Swoolecan\Foundation\Helpers\CommonTool;
 
 class ToolController extends Controller
 {
-    public function tool($sort = '')
+    public function tool($sort = 'pingtai')
     {
         $sortModel = $this->getModelObj('bench-toolsort');
-        $sorts = $sortModel->get()->toArray();
+        $sorts = $sortModel->orderBy('orderlist', 'desc')->get()->toArray();
         $sorts = CommonTool::createTree($sorts, '');
 
 		$sortData = $sortModel->where('code', $sort)->first();
@@ -28,7 +28,7 @@ class ToolController extends Controller
 		    'sortCodes' => empty($sortCodes) ? null : $sortCodes,
             'sortData' => $sortData,
             'subInfos' => $subInfos,
-            'sorts' => $sorts,
+            'sorts' => $this->isMobile(true) ? array_chunk($sorts, ceil(count($sorts) / 2), true) : [$sorts],
         ];
 
 		//$dataTdk = ['{{TAGSTR}}' => $sortData['name']];
@@ -91,11 +91,14 @@ class ToolController extends Controller
 
 	protected function viewPath()
 	{
-		return 'human';
+		return 'default';
 	}
 
-	public function isMobile()
+	public function isMobile($force = false)
 	{
-		return null;
+        if (empty($force)) {
+		    return null;
+        }
+        return parent::isMobile($force);
 	}
 }

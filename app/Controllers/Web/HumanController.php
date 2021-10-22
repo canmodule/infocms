@@ -26,9 +26,12 @@ class HumanController extends Controller
         return $this->customView('resume');
     }
 
-	public function isMobile()
+	public function isMobile($force = false)
 	{
-		return null;
+        if (empty($force)) {
+		    return null;
+        }
+        return parent::isMobile($force);
 	}
 
 	protected function viewPath()

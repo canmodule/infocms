@@ -50,6 +50,7 @@ class AbstractRepository extends AbstractRepositoryBase
     {
         $url = $model->$pointField;
         $url = strpos($url, 'htt') !== false ? $url : 'https://zsbt-1254153797.cos.ap-shanghai.myqcloud.com/' . $url;
+        //$url = strpos($url, 'htt') !== false ? $url : 'bts.liupinshuyuan.com/' . $url;
         if (strpos($url, '?') !== false) {
             $url = substr($url, 0, strpos($url, '?'));
         }

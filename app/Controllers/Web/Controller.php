@@ -46,10 +46,9 @@ class Controller extends AbstractController
         return $this->customView($view, $datas);
     }
 
-    public function isMobile()
+    public function isMobile($force = false)
     {
-return false;
-        //return AgentTool::isMobile();
+        return $this->resource->isMobile();
     }
 
 	protected function customView($view, $datas = [], $viewPath = null)
