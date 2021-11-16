@@ -79,7 +79,8 @@ class ToolController extends Controller
     {
         $toolModel = $this->getModelObj('bench-toolbar');
         foreach ($subInfos as $sCode => & $sInfo) {
-            $tools = $toolModel->where(['sort' => $sCode])->get();
+            $tools = $toolModel->where(['sort' => $sCode])->orderBy('orderlist', 'desc')->get();
+            //$tools = $toolModel->where(['sort' => $sCode])->get();
             $toolDatas = [];
             foreach ($tools as $tool) {
                 $toolDatas[$tool['code']] = $tool->toArray();

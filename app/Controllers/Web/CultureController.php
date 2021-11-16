@@ -11,10 +11,32 @@ class CultureController extends Controller
         return $this->customView('home', ['datas' => $datas]);
     }
 
-    public function category()
+    public function category($sort = '')
     {
-        $datas = [];
-        return $this->customView('category', ['datas' => $datas]);
+        $datas = $this->getRepositoryObj('culture-scholarism')->getCategoryDatas($sort);
+        return $this->customView('category', $datas);
+        $datas = $this->getModelObj('culture-scholarism')->get();
+        $oldDatas = $this->getModelObj('culture-headnote')->get();
+        $oldDatas = $oldDatas->keyBy('name');
+        foreach ($datas as $data) {
+            $ext = '';
+            if (isset($oldDatas[$data['name']])) {
+                $old = $oldDatas[$data['name']];
+                if ($old['volume'] != $data['volume']) {
+
+                    echo "nnn-{$data['name']}-{$data['sort']}-{$data['volume']}-{$data['author']}-{$data['translator']}-{$data['nationality']}<br />";
+                    echo "ooo-{$old['name']}-{$old['sort']}-{$old['volume']}-{$old['author']}-{$old['translator']}-{$old['nationality']}<br />";
+                }
+                $ext .= $data['author'] != $old['author'] ? $old['author'] . '===' : '';
+                $ext .= $data['nationality'] != $old['nationality'] ? $old['nationality'] . '===' : '';
+                $data->extfield = $ext;
+                $data->translator = $old->translator;
+                $data->save();
+                $old->extfield = 'dealed';
+                $old->save();
+            }
+        }
+        exit();
     }
 
     public function bookDetail()
