@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Repositories;
 
-class SubjectRepository extends AbstractRepository
+class TagRepository extends AbstractRepository
 {
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'code', 'type', 'name', 'title', 'description', 'hotline', 'created_at', 'updated_at', 'status', 'note'],
+            'list' => ['id', 'sort', 'code', 'name', 'title', 'orderlist', 'description', 'status'],
             'listSearch' => ['id', 'name'],
             'add' => ['name'],
             'update' => ['name'],
