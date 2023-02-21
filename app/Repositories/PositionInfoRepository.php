@@ -9,31 +9,42 @@ class PositionInfoRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'position_code', 'info_type', 'info_id', 'title', 'icon', 'icon_color', 'icon_path', 'class_style', 'orderlist', 'description', 'status'],
-            'listSearch' => ['id', 'name'],
-            'add' => ['name'],
-            'update' => ['name'],
+            'list' => ['id', 'title', 'position_code', 'picture', 'jump_type', 'url', 'filter_params', 'icon', 'orderlist', 'description', 'status'],
+            'listSearch' => ['id', 'title', 'position_code', 'jump_type', 'status'],
+            'add' => ['title', 'position_code', 'picture', 'jump_type', 'url', 'filter_params', 'icon', 'orderlist', 'description', 'status'],
+            'update' => ['title', 'position_code', 'picture', 'jump_type', 'url', 'filter_params', 'icon', 'orderlist', 'description', 'status'],
         ];
     }
 
     public function getShowFields()
     {
         return [
-            //'type' => ['valueType' => 'key'],
+            'jump_type' => ['valueType' => 'key'],
         ];
     }
 
     public function getSearchFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'jump_type' => ['type' => 'select', 'multiple' => 1],
         ];
     }
 
     public function getFormFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'jump_type' => ['type' => 'select'],
+            'position_code' => ['type' => 'selectSearch', 'require' => ['add'], 'searchResource' => 'position'],
+            //'filter_params' => ['valueType' => 'select'],
+        ];
+    }
+
+    protected function _jumpTypeKeyDatas()
+    {
+        return [
+            '' => '无类型',
+            'website' => '页面',
+            'miniprogram' => '小程序',
         ];
     }
 
