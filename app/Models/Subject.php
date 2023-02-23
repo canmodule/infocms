@@ -6,7 +6,8 @@ namespace ModuleInfocms\Models;
 
 class Subject extends AbstractModel
 {
-    //protected $table = '';
-    protected $fillable = ['name'];
+    protected $table = 'subject';
+    protected $primaryKey = 'code';
+    public $incrementing = false;
 
 }

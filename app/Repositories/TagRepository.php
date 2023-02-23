@@ -9,31 +9,34 @@ class TagRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'sort', 'code', 'name', 'title', 'orderlist', 'description', 'status'],
-            'listSearch' => ['id', 'name'],
-            'add' => ['name'],
-            'update' => ['name'],
+            'list' => ['code', 'sort', 'name', 'badge', 'title', 'description', 'created_at', 'status'],
+            'listSearch' => ['name', 'code', 'badge', 'status', 'created_at'],
+            'add' => ['code', 'sort', 'name', 'badge', 'title', 'description', 'status'],
+            'update' => ['code', 'sort', 'name', 'badge', 'title', 'description', 'status'],
         ];
     }
 
     public function getShowFields()
     {
         return [
-            //'type' => ['valueType' => 'key'],
+            'badge' => ['valueType' => 'key'],
+            'sort' => ['valueType' => 'key'],
         ];
     }
 
     public function getSearchFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'badge' => ['type' => 'select'],
+            'sort' => ['type' => 'select'],
         ];
     }
 
     public function getFormFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'badge' => ['type' => 'select'],
+            'sort' => ['type' => 'select'],
         ];
     }
 
@@ -43,6 +46,23 @@ class TagRepository extends AbstractRepository
             0 => '未激活',
             1 => '使用中',
             99 => '锁定',
+        ];
+    }
+
+    protected function _sortKeyDatas()
+    {
+        return [
+            '' => '未分类',
+            'topic' => '话题',
+        ];
+    }
+
+    protected function _badgeKeyDatas()
+    {
+        return [
+            'hot' => 'HOT',
+            'recommend' => '推荐',
+            'look' => '看看',
         ];
     }
 }

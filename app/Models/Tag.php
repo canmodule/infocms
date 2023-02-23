@@ -7,6 +7,7 @@ namespace ModuleInfocms\Models;
 class Tag extends AbstractModel
 {
     protected $table = 'tag';
-    protected $guarded = ['id'];
+    protected $primaryKey = 'code';
+    public $incrementing = false;
 
 }
