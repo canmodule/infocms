@@ -12,7 +12,7 @@ class PositionRequest extends AbstractRequest
             'code' => [
                 'bail',
                 'required',
-                'unique:infocms.position',//$this->getRule()->unique('position')->where(function ($query) use ($app) {return $query->where('app', $app);})->ignore($this->routeParam('code', 0)),
+                'unique:infocms.position',
             ],
             'name' => ['bail', 'required'],
             'type' => ['required', $this->_getKeyValues('type')],
@@ -25,6 +25,11 @@ class PositionRequest extends AbstractRequest
     protected function _updateRule()
     {
         return [
+            'code' => [
+                'bail',
+                'filled',
+                $this->getRule()->unique('infocms.position')->ignore($this->routeParam('code', '')),
+            ],
         ];
     }
 

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class GroupRequest extends AbstractRequest
+class NavsortRequest extends AbstractRequest
 {
     protected function _addRule()
     {
@@ -12,8 +12,9 @@ class GroupRequest extends AbstractRequest
             'code' => [
                 'bail',
                 'required',
-                'unique:infocms.group',
+                'unique:infocms.position',
             ],
+            'parent_code' => ['bail', 'nullable', 'exists:infocms.position,code'],
             'name' => ['bail', 'required'],
             'status' => ['required', $this->_getKeyValues('status')],
         ];
@@ -25,11 +26,11 @@ class GroupRequest extends AbstractRequest
             'code' => [
                 'bail',
                 'filled',
-                $this->getRule()->unique('infocms.group')->ignore($this->routeParam('code', '')),
+                $this->getRule()->unique('infocms.position')->ignore($this->routeParam('code', '')),
             ],
+            'parent_code' => ['bail', 'filled', 'exists:infocms.position,code'],
         ];
     }
-
 
     public function attributes(): array
     {

@@ -7,6 +7,7 @@ namespace ModuleInfocms\Models;
 class Topic extends AbstractModel
 {
     protected $table = 'topic';
-    protected $guarded = ['id'];
+    protected $primaryKey = 'code';
+    public $incrementing = false;
 
 }

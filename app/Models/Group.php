@@ -7,6 +7,7 @@ namespace ModuleInfocms\Models;
 class Group extends AbstractModel
 {
     protected $table = 'group';
-    protected $guarded = ['id'];
+    protected $primaryKey = 'code';
+    public $incrementing = false;
 
 }

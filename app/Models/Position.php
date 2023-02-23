@@ -10,5 +10,4 @@ class Position extends AbstractModel
     protected $primaryKey = 'code';
     protected $table = 'position';
     protected $guarded = [];
-
 }

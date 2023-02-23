@@ -9,31 +9,31 @@ class TopicRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'code', 'type', 'name', 'title', 'description', 'created_at', 'updated_at', 'status'],
-            'listSearch' => ['id', 'name'],
-            'add' => ['name'],
-            'update' => ['name'],
+            'list' => ['code', 'type', 'name', 'badge', 'title', 'description', 'created_at', 'status'],
+            'listSearch' => ['name', 'code', 'badge', 'status', 'created_at'],
+            'add' => ['code', 'type', 'name', 'badge', 'title', 'description', 'status'],
+            'update' => ['code', 'type', 'name', 'badge', 'title', 'description', 'status'],
         ];
     }
 
     public function getShowFields()
     {
         return [
-            //'type' => ['valueType' => 'key'],
+            'badge' => ['valueType' => 'key'],
         ];
     }
 
     public function getSearchFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'badge' => ['type' => 'select'],
         ];
     }
 
     public function getFormFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'badge' => ['type' => 'select'],
         ];
     }
 
@@ -43,6 +43,15 @@ class TopicRepository extends AbstractRepository
             0 => '未激活',
             1 => '使用中',
             99 => '锁定',
+        ];
+    }
+
+    protected function _badgeKeyDatas()
+    {
+        return [
+            'hot' => 'HOT',
+            'recommend' => '推荐',
+            'look' => '看看',
         ];
     }
 }

@@ -4,15 +4,15 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Repositories;
 
-class GroupRepository extends AbstractRepository
+class NavsortInfoRepository extends AbstractRepository
 {
     protected function _sceneFields()
     {
         return [
-            'list' => ['code', 'type', 'name', 'title', 'description', 'created_at', 'updated_at', 'status', 'orderlist'],
-            'listSearch' => ['name'],
-            'add' => ['code', 'type', 'name', 'title', 'description', 'status', 'orderlist'],
-            'update' => ['code', 'type', 'name', 'title', 'description', 'status', 'orderlist'],
+            'list' => ['id', 'navsort_code', 'info_id', 'title', 'home_recommend', 'orderlist', 'description', 'status', 'extfield'],
+            'listSearch' => ['id', 'name'],
+            'add' => ['name'],
+            'update' => ['name'],
         ];
     }
 
