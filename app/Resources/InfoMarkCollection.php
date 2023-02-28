@@ -4,6 +4,6 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Resources;
 
-class TagInfo extends AbstractResource
+class InfoMarkCollection extends AbstractCollection
 {
 }

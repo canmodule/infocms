@@ -12,9 +12,9 @@ class TopicRequest extends AbstractRequest
             'code' => [
                 'bail',
                 'required',
-                'unique:infocms.position',
+                'unique:infocms.topic',
             ],
-            'name' => ['bail', 'required'],
+            //'name' => ['bail', 'required'],
             'badge' => ['required', $this->_getKeyValues('badge')],
             'status' => ['required', $this->_getKeyValues('status')],
         ];
@@ -26,7 +26,7 @@ class TopicRequest extends AbstractRequest
             'code' => [
                 'bail',
                 'filled',
-                $this->getRule()->unique('infocms.position')->ignore($this->routeParam('code', '')),
+                $this->getRule()->unique('infocms.topic')->ignore($this->routeParam('code', '')),
             ],
         ];
     }
@@ -43,5 +43,10 @@ class TopicRequest extends AbstractRequest
         return [
             //'name.required' => '请填写名称',
         ];
+    }
+
+    public function filterDirtyData($data)
+    {
+        return $data;
     }
 }

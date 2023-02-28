@@ -4,6 +4,6 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Controllers;
 
-class TagController extends AbstractController
+class MicroHeadlineController extends AbstractController
 {
 }

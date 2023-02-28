@@ -14,4 +14,17 @@ class AbstractRepository extends AbstractRepositoryBase
     {
         return 'infocms';
     }
+
+    protected function _badgeKeyDatas()
+    {
+        return [
+            'hot' => 'HOT',
+            'recommend' => '推荐',
+            'look' => '看看',
+        ];
+    }
+
+    public function dealTagData($tag)
+    {
+    }
 }

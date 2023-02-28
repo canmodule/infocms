@@ -9,10 +9,10 @@ class TopicRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['code', 'type', 'name', 'badge', 'title', 'description', 'created_at', 'status'],
+            'list' => ['code', 'name', 'badge', 'title', 'description', 'created_at', 'status'],
             'listSearch' => ['name', 'code', 'badge', 'status', 'created_at'],
-            'add' => ['code', 'type', 'name', 'badge', 'title', 'description', 'status'],
-            'update' => ['code', 'type', 'name', 'badge', 'title', 'description', 'status'],
+            'add' => ['code', 'title', 'badge', 'description', 'status'],
+            'update' => ['code', 'title', 'badge', 'description', 'status'],
         ];
     }
 
@@ -20,6 +20,7 @@ class TopicRepository extends AbstractRepository
     {
         return [
             'badge' => ['valueType' => 'key'],
+            'name' => ['valueType' => 'callback', 'method' => 'formatTagShow'],
         ];
     }
 
@@ -34,6 +35,7 @@ class TopicRepository extends AbstractRepository
     {
         return [
             'badge' => ['type' => 'select'],
+            'code' => ['type' => 'selectSearch', 'searchApp' => 'passport', 'searchResource' => 'tag', 'allowCustom' => 1],
         ];
     }
 
@@ -43,15 +45,6 @@ class TopicRepository extends AbstractRepository
             0 => '未激活',
             1 => '使用中',
             99 => '锁定',
-        ];
-    }
-
-    protected function _badgeKeyDatas()
-    {
-        return [
-            'hot' => 'HOT',
-            'recommend' => '推荐',
-            'look' => '看看',
         ];
     }
 }
