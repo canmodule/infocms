@@ -10,4 +10,8 @@ class Topic extends AbstractModel
     protected $primaryKey = 'code';
     public $incrementing = false;
 
+    public function getNameAttribute()
+    {
+        return $this->formatTagShow();
+    }
 }

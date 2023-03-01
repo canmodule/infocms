@@ -20,7 +20,7 @@ class TopicRepository extends AbstractRepository
     {
         return [
             'badge' => ['valueType' => 'key'],
-            'name' => ['valueType' => 'callback', 'method' => 'formatTagShow'],
+            //'name' => ['valueType' => 'callback', 'method' => 'formatTagShow'],
         ];
     }
 

@@ -9,10 +9,10 @@ class SubjectRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'code', 'type', 'name', 'title', 'description', 'hotline', 'created_at', 'updated_at', 'status', 'note'],
+            'list' => ['code', 'type', 'group_code', 'name', 'title', 'description', 'created_at', 'status'],
             'listSearch' => ['id', 'name'],
-            'add' => ['name'],
-            'update' => ['name'],
+            'add' => ['code', 'type', 'group_code', 'title', 'description', 'status'],
+            'update' => ['code', 'type', 'group_code', 'title', 'description', 'status'],
         ];
     }
 
@@ -33,7 +33,8 @@ class SubjectRepository extends AbstractRepository
     public function getFormFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            //'type' => ['type' => 'select'],
+            'group_code' => ['type' => 'select', 'infos' => $this->getPointKeyValues('group'), 'multiple' => 1],
         ];
     }
 
