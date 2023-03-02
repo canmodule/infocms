@@ -34,6 +34,7 @@ class SubjectRepository extends AbstractRepository
     {
         return [
             //'type' => ['type' => 'select'],
+            'code' => ['type' => 'selectSearch', 'searchApp' => 'passport', 'searchResource' => 'tag', 'allowCustom' => 1],
             'group_code' => ['type' => 'select', 'infos' => $this->getPointKeyValues('group'), 'multiple' => 1],
         ];
     }
