@@ -10,10 +10,16 @@ class Category extends AbstractModel
     public $incrementing = false;
     protected $primaryKey = 'code';
     protected $fillable = ['name'];
+    public $timestamps = false;
 
-    public function parentElem()
+    public function parentInfo()
     {
-        return $this->hasOne('ModuleCulture\Models\CultureCategory', 'code', 'parent_code');
+        return $this->hasOne(Category::class, 'code', 'parent_code');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->formatTagDatas('string');
     }
 
     public function getUrl()

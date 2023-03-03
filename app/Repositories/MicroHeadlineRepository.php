@@ -11,7 +11,7 @@ class MicroHeadlineRepository extends AbstractRepository
         return [
             'list' => ['id', 'name', 'title', 'content', 'created_at', 'updated_at', 'status'],
             'listSearch' => ['id', 'name'],
-            'add' => ['name'],
+            'add' => ['category_code', 'name', 'title', 'status', 'content'],
             'update' => ['name'],
         ];
     }
@@ -19,21 +19,19 @@ class MicroHeadlineRepository extends AbstractRepository
     public function getShowFields()
     {
         return [
-            //'type' => ['valueType' => 'key'],
         ];
     }
 
     public function getSearchFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
         ];
     }
 
     public function getFormFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            'category_code' => ['type' => 'cascader', 'props' => ['value' => 'code', 'label' => 'name', 'children' => 'subInfos', 'checkStrictly' => false, 'multiple' => false], 'infos' => $this->getRepositoryObj('category')->getPointTreeDatas('category', 2, 'list')],
         ];
     }
 

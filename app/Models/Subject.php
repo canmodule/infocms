@@ -12,7 +12,7 @@ class Subject extends AbstractModel
 
     public function getNameAttribute()
     {
-        return $this->formatTagShow();
+        return $this->formatTagDatas('string');
     }
 
     public function getGroupCodeAttribute()

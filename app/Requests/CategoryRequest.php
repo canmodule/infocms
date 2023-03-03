@@ -6,10 +6,29 @@ namespace ModuleInfocms\Requests;
 
 class CategoryRequest extends AbstractRequest
 {
+    protected function _addRule()
+    {
+        return [
+            'code' => [
+                'bail',
+                'required',
+                'unique:infocms.category',
+            ],
+            'parent_code' => ['bail', 'nullable', 'exists:infocms.category,code'],
+            //'name' => ['bail', 'required'],
+            'status' => ['required', $this->_getKeyValues('status')],
+        ];
+    }
+
     protected function _updateRule()
     {
         return [
-            'id' => ['bail', 'required', 'exists'],
+            'code' => [
+                'bail',
+                'filled',
+                $this->getRule()->unique('infocms.category')->ignore($this->routeParam('code', '')),
+            ],
+            'parent_code' => ['bail', 'filled', 'exists:infocms.category,code'],
         ];
     }
 

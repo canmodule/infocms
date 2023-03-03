@@ -5,17 +5,26 @@ namespace ModuleInfocms\Repositories;
 
 class CategoryRepository extends AbstractRepository
 {
+    protected function _sceneFields()
+    {
+        return [
+            'list' => ['name', 'parent_code', 'code', 'title', 'brief', 'description', 'orderlist', 'status'],
+            'listSearch' => ['code', 'parent_code', 'title', 'status'],
+            'add' => ['parent_code', 'code', 'title', 'brief', 'description', 'orderlist', 'status'],
+            'update' => ['parent_code', 'code', 'title', 'brief', 'description', 'orderlist', 'status'],
+        ];
+    }
+
     public function getShowFields()
     {
         return [
-            'type_code' => ['valueType' => 'point', 'relate' => 'type'],
+            'parent_code' => ['valueType' => 'point', 'relate' => 'parentInfo'],
         ];
     }
 
     public function getSearchFields()
     {
         return [
-            'type_code' => ['type' => 'select', 'infos' => $this->getPointKeyValues('type')],
             'parent_code' => ['type' => 'cascader', 'props' => ['value' => 'code', 'label' => 'name', 'children' => 'subInfos', 'checkStrictly' => true, 'multiple' => true], 'infos' => $this->getPointTreeDatas(null, 2, 'list')],
         ];
     }
@@ -23,18 +32,8 @@ class CategoryRepository extends AbstractRepository
     public function getFormFields()
     {
         return [
-            'type_code' => ['type' => 'select', 'infos' => $this->getPointKeyValues('type')],
             'parent_code' => ['type' => 'cascader', 'props' => ['value' => 'code', 'label' => 'name', 'children' => 'subInfos', 'checkStrictly' => true], 'infos' => $this->getPointTreeDatas(null, 2, 'list')],
-        ];
-    }
-
-    protected function _sceneFields()
-    {
-        return [
-            'list' => ['code', 'name', 'type_code', 'parent_code', 'orderlist', 'status'],
-            'listSearch' => ['code', 'name', 'type_code', 'parent_code', 'status'],
-            'add' => ['code', 'name', 'type_code', 'brief', 'description', 'parent_code', 'orderlist', 'meta_title', 'meta_keyword', 'meta_description', 'status'],
-            'update' => ['code', 'name', 'type_code', 'brief', 'description', 'parent_code', 'orderlist', 'meta_title', 'meta_keyword', 'meta_description', 'status'],
+            'code' => ['type' => 'selectSearch', 'searchApp' => 'passport', 'searchResource' => 'tag', 'allowCustom' => 1],
         ];
     }
 
@@ -44,6 +43,13 @@ class CategoryRepository extends AbstractRepository
             0 => '未激活',
             1 => '使用中',
             99 => '锁定',
+        ];
+    }
+
+    public function _getFieldOptions()
+    {
+        return [
+            'name' => ['width' => '200', 'align' => 'left'],
         ];
     }
 }

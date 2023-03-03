@@ -27,7 +27,8 @@ class ArticleRepository extends AbstractRepository
     public function getFormFields()
     {
         return [
-            //'status' => ['type' => 'radio', 'infos' => $this->getKeyValues('status')],
+            'status' => ['type' => 'radio'],
+            'parent_code' => ['type' => 'cascader', 'props' => ['value' => 'code', 'label' => 'name', 'children' => 'subInfos', 'checkStrictly' => true], 'infos' => $this->getPointTreeDatas(null, 2, 'list')],
         ];
     }
 
