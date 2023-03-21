@@ -7,6 +7,31 @@ use Swoolecan\Foundation\Helpers\DatetimeTool;
 
 class FetchDataService extends AbstractService
 {
+    public function getSubjectInfos($params = [])
+    {
+        $query = $this->getModelObj('subject');
+        //$infos = $query->where($params)->get();
+        $infos = $query->get();
+        $results = [];
+        foreach ($infos as $info) {
+            $info->name = $info->name;
+            $results[] = $info->toArray();
+        }
+        return $results;
+    }
+
+    public function getGroupInfos($params = [])
+    {
+        $query = $this->getModelObj('group');
+        $infos = $query->where($params)->get();
+        $results = [];
+        foreach ($infos as $info) {
+            $info->name = $info->name;
+            $results[] = $info->toArray();
+        }
+        return $results;
+    }
+
     public function getBannerInfos($app, $position)
     {
         $query = $this->getModelObj('positionInfo');
@@ -43,13 +68,13 @@ class FetchDataService extends AbstractService
 
     public function getTopicInfos($where)
     {
-        $infos = $this->getModelObj('tag')->limit(30)->get();
+        $infos = $this->getModelObj('topic')->limit(30)->get();
         $results = [];
         foreach ($infos as $info) {
             $results[] = [
                 'id' => $info['code'],
                 'name' => $info['name'],
-                'badge' => $this->getRepositoryObj('tag')->getKeyValues('badge', $info['badge']),
+                'badge' => $this->getRepositoryObj('topic')->getKeyValues('badge', $info['badge']),
             ];
         }
         return $results;

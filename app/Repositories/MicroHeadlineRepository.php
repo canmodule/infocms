@@ -9,16 +9,18 @@ class MicroHeadlineRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['id', 'name', 'title', 'content', 'created_at', 'updated_at', 'status'],
+            'list' => ['id', 'name', 'title', 'content', 'created_at', 'updated_at', 'status', 'edit'],
             'listSearch' => ['id', 'name'],
+            'view' => ['id', 'category_code', 'name', 'title', 'status', 'content'],
             'add' => ['category_code', 'name', 'title', 'status', 'content'],
-            'update' => ['name'],
+            'update' => ['category_code', 'name', 'title', 'status', 'content'],
         ];
     }
 
     public function getShowFields()
     {
         return [
+            'edit' => ['valueType' => 'callback', 'method' => 'formatEditMd'],
         ];
     }
 
@@ -42,5 +44,11 @@ class MicroHeadlineRepository extends AbstractRepository
             1 => '使用中',
             99 => '锁定',
         ];
+    }
+
+    public function formatEditMd($model, $field)
+    {
+        $url = "http://md.91zuiai.com/?app={$this->getAppCode()}&resource=micro-headlines&id={$model->id}";
+        return "<a href='{$url}' target='_blank'>Md编辑</a>";
     }
 }

@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class ArticleRequest extends AbstractRequest
+class HeadnoteRequest extends AbstractRequest
 {
     protected function _updateRule()
     {
         return [
-            //'id' => ['bail', 'required', 'exists'],
+            'id' => ['bail', 'required', 'exists'],
         ];
     }
 

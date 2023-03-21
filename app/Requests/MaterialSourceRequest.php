@@ -4,12 +4,11 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class ArticleRequest extends AbstractRequest
+class MaterialSourceRequest extends AbstractRequest
 {
     protected function _updateRule()
     {
         return [
-            //'id' => ['bail', 'required', 'exists'],
         ];
     }
 
