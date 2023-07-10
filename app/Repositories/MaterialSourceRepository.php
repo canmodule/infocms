@@ -11,8 +11,8 @@ class MaterialSourceRepository extends AbstractRepository
         return [
             'list' => ['id', 'category_code', 'name', 'author', 'domain', 'url', 'description', 'attention', 'orderlist', 'status', 'material_num', 'addinfo'],
             'listSearch' => ['id', 'name', 'category_code', 'attention', 'status', 'url'],
-            'add' => ['url', 'category_code', 'author', 'attention', 'status'],
-            'update' => ['category_code', 'name', 'description', 'domain', 'author', 'attention', 'status'],
+            'add' => ['url', 'category_code', 'figure', 'book', 'author', 'attention', 'status'],
+            'update' => ['category_code', 'figure', 'book', 'name', 'description', 'domain', 'author', 'attention', 'status'],
         ];
     }
 
@@ -43,6 +43,8 @@ class MaterialSourceRepository extends AbstractRepository
     {
         return [
             //'type' => ['type' => 'select'],
+            'figure' => ['type' => 'selectSearch', 'require' => ['add'], 'searchResource' => 'figure', 'searchApp' => 'culture'],
+            'book' => ['type' => 'selectSearch', 'require' => ['add'], 'searchResource' => 'book', 'searchApp' => 'culture'],
             'category_code' => ['type' => 'cascader', 'props' => ['value' => 'code', 'label' => 'name', 'children' => 'subInfos', 'checkStrictly' => true], 'infos' => $this->getRepositoryObj('category')->getPointTreeDatas('category', 2, 'list')],
         ];
     }

@@ -9,7 +9,12 @@ class MaterialSourceRequest extends AbstractRequest
     protected function _addRule()
     {
         return [
-            'url' => ['bail', 'active_url'],
+            'url' => [
+                'bail',
+                'required',
+                'active_url',
+                'unique:infocms.material_source',
+            ],
             'parent_code' => ['bail', 'nullable', 'exists:infocms.category,code'],
             'status' => ['bail', 'nullable', $this->_getKeyValues('status')],
             'attention' => ['bail', 'nullable', $this->_getKeyValues('status')],
@@ -19,6 +24,12 @@ class MaterialSourceRequest extends AbstractRequest
     protected function _updateRule()
     {
         return [
+            /*'url' => [
+                'bail',
+                'filled',
+                'active_url',
+                $this->getRule()->unique('infocms.material_source')->ignore($this->input('url')),
+            ],*/
             'parent_code' => ['bail', 'nullable', 'exists:infocms.category,code'],
             'status' => ['bail', 'nullable', $this->_getKeyValues('status')],
             'attention' => ['bail', 'nullable', $this->_getKeyValues('status')],

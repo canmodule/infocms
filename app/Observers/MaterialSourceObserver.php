@@ -26,9 +26,11 @@ class MaterialSourceObserver
     public function getPageInfo($model)
     {
         $result = $model->getServiceObj('passport-guzzle')->fetchRemoteData(['pointUrl' => $model->url]);
-        //$content = file_get_contents(urldecode($fUrl));
+        $content = file_get_contents(urldecode($model->url));
+        //echo $content;exit();
         $crawler = new Crawler();
-        $crawler->addContent($result['bodyStr']);
+        $crawler->addContent($content);
+        //$crawler->addContent($result['bodyStr']);
         $title = $crawler->filter('title')->text();
         $description = '';
         $crawler->filter('meta')->each(function ($node) use (& $description) {
