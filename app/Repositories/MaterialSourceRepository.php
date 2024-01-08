@@ -28,7 +28,7 @@ class MaterialSourceRepository extends AbstractRepository
 
     public function formatAddinfoMd($model, $field)
     {
-        $url = "http://md.91zuiai.com/?app={$this->getAppCode()}&resource=material-pseudos&material_source_id={$model->id}";
+        $url = "http://md.canliang.wang/?app={$this->getAppCode()}&resource=material-pseudos&material_source_id={$model->id}";
         return "<a href='{$url}' target='_blank'>生成素材</a>";
     }
 

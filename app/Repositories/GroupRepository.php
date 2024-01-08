@@ -20,7 +20,7 @@ class GroupRepository extends AbstractRepository
     {
         return [
             //'type' => ['valueType' => 'key'],
-            'name' => ['valueType' => 'callback', 'method' => 'formatTagShow'],
+            //'name' => ['valueType' => 'callback', 'method' => 'formatTagShow'],
         ];
     }
 

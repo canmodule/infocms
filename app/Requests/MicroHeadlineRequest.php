@@ -9,7 +9,7 @@ class MicroHeadlineRequest extends AbstractRequest
     protected function _updateRule()
     {
         return [
-            'id' => ['bail', 'required', 'exists'],
+            //'id' => ['bail', 'required', 'exists'],
         ];
     }
 

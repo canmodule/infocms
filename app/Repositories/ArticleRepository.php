@@ -25,7 +25,7 @@ class ArticleRepository extends AbstractRepository
 
     public function formatEditMd($model, $field)
     {
-        $url = "http://md.91zuiai.com/?app={$this->getAppCode()}&resource=articles&id={$model->id}";
+        $url = "http://md.canliang.wang/?app={$this->getAppCode()}&resource=articles&id={$model->id}";
         return "<a href='{$url}' target='_blank'>Md编辑</a>";
     }
 
