@@ -4,15 +4,15 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Repositories;
 
-class SubjectRepository extends AbstractRepository
+class SubjectSortRepository extends AbstractRepository
 {
     protected function _sceneFields()
     {
         return [
-            'list' => ['code', 'type', 'group_code', 'name', 'title', 'description', 'created_at', 'status'],
-            'listSearch' => ['code', 'name'],
-            'add' => ['code', 'type', 'group_code', 'title', 'description', 'status'],
-            'update' => ['type', 'group_code', 'title', 'description', 'status'],
+            'list' => ['code', 'name', 'description', 'orderlist', 'status'],
+            'listSearch' => ['id', 'name'],
+            'add' => ['code', 'title', 'description', 'orderlist', 'status'],
+            'update' => ['title', 'description', 'orderlist', 'status'],
         ];
     }
 
@@ -26,7 +26,7 @@ class SubjectRepository extends AbstractRepository
     public function getSearchFields()
     {
         return [
-            //'type' => ['type' => 'select', 'infos' => $this->getKeyValues('type')],
+            //'type' => ['type' => 'select'],
         ];
     }
 
@@ -35,7 +35,6 @@ class SubjectRepository extends AbstractRepository
         return [
             //'type' => ['type' => 'select'],
             'code' => ['type' => 'selectSearch', 'searchApp' => 'passport', 'searchResource' => 'tag', 'allowCustom' => 1],
-            'group_code' => ['type' => 'select', 'infos' => $this->getPointKeyValues('group'), 'multiple' => 1],
         ];
     }
 

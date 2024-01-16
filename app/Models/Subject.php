@@ -19,7 +19,7 @@ class Subject extends AbstractModel
     {
         $infos = $this->getGroupDatas();
         $str = '';
-        foreach ($infos as $info) {
+        foreach ((array) $infos as $info) {
             $str .= "{$info->groupInfo->name} ; ";
         }
         return trim($str, ' ; ');
@@ -39,7 +39,7 @@ class Subject extends AbstractModel
             return true;
         }
         $this->getModelObj('groupSubject')->where('subject_code', $this->code)->delete();
-        foreach ($groupCodes as $groupCode) {
+        foreach ((array) $groupCodes as $groupCode) {
             $nData = ['subject_code' => $this->code, 'group_code' => $groupCode];
             $exist = $this->getModelObj('groupSubject')->where($nData)->withTrashed()->first();
             if (!empty($exist)) {
