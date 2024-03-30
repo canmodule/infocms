@@ -9,10 +9,10 @@ class SubjectRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['code', 'type', 'group_code', 'name', 'title', 'description', 'created_at', 'status'],
+            'list' => ['code', 'subject_sort', 'group_code', 'name', 'title', 'description', 'created_at', 'status'],
             'listSearch' => ['code', 'name'],
-            'add' => ['code', 'type', 'group_code', 'title', 'description', 'status'],
-            'update' => ['type', 'group_code', 'title', 'description', 'status'],
+            'add' => ['code', 'subject_sort', 'group_code', 'title', 'description', 'status'],
+            'update' => ['subject_sort', 'group_code', 'title', 'description', 'status'],
         ];
     }
 
@@ -20,6 +20,7 @@ class SubjectRepository extends AbstractRepository
     {
         return [
             //'type' => ['valueType' => 'key'],
+            'subject_sort' => ['valueType' => 'select', 'showType' => 'select', 'infos' => $this->getPointKeyValues('subjectSort')],
         ];
     }
 
@@ -36,6 +37,7 @@ class SubjectRepository extends AbstractRepository
             //'type' => ['type' => 'select'],
             'code' => ['type' => 'selectSearch', 'searchApp' => 'passport', 'searchResource' => 'tag', 'allowCustom' => 1],
             'group_code' => ['type' => 'select', 'infos' => $this->getPointKeyValues('group'), 'multiple' => 1],
+            'subject_sort' => ['type' => 'select', 'infos' => $this->getPointKeyValues('subjectSort')],
         ];
     }
 

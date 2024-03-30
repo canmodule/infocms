@@ -9,10 +9,10 @@ class SubjectSortRepository extends AbstractRepository
     protected function _sceneFields()
     {
         return [
-            'list' => ['code', 'name', 'description', 'orderlist', 'status'],
+            'list' => ['code', 'name', 'cover', 'description', 'orderlist', 'status'],
             'listSearch' => ['id', 'name'],
-            'add' => ['code', 'title', 'description', 'orderlist', 'status'],
-            'update' => ['title', 'description', 'orderlist', 'status'],
+            'add' => ['code', 'title', 'cover', 'description', 'orderlist', 'status'],
+            'update' => ['title', 'cover', 'description', 'orderlist', 'status'],
         ];
     }
 
@@ -20,6 +20,7 @@ class SubjectSortRepository extends AbstractRepository
     {
         return [
             //'type' => ['valueType' => 'key'],
+            'orderlist' => ['showType' => 'edit'],
         ];
     }
 
@@ -35,6 +36,16 @@ class SubjectSortRepository extends AbstractRepository
         return [
             //'type' => ['type' => 'select'],
             'code' => ['type' => 'selectSearch', 'searchApp' => 'passport', 'searchResource' => 'tag', 'allowCustom' => 1],
+        ];
+    }
+
+    protected function _typeKeyDatas()
+    {
+        return [
+            'ruxue' => '儒学',
+            'luxunzhuanlan' => '鲁迅专栏',
+            'zhongguolishi' => '中国历史',
+            'waiguolishi' => '外国历史',
         ];
     }
 

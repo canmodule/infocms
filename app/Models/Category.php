@@ -17,10 +17,10 @@ class Category extends AbstractModel
         return $this->hasOne(Category::class, 'code', 'parent_code');
     }
 
-    public function getNameAttribute()
+    /*public function getNameAttribute()
     {
         return $this->formatTagDatas('string');
-    }
+    }*/
 
     public function getUrl()
     {

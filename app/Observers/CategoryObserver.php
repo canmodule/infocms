@@ -9,7 +9,7 @@ use ModuleInfocms\Models\Category;
 
 class CategoryObserver
 {
-    use TagTrait;
+    /*use TagTrait;
 
     public function saved(Category $model)
     {
@@ -27,5 +27,5 @@ class CategoryObserver
     {
         $model->_tagDeleted();
         return true;
-    }
+    }*/
 }
