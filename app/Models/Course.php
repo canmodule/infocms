@@ -12,9 +12,9 @@ class Course extends AbstractModel
     public function createSectionLessons()
     {
         print_r($this->toArray());
-        $cNum = rand(3, 6);
+        $cNum = 1;//rand(2, 3);
         for ($i = 1; $i <= $cNum; $i++) {
-            $sNum = rand(3, 6);
+            $sNum = rand(5, 7);
             $cData = [
                 'course_id' => $this->id,
                 'orderlist' => $i,
@@ -25,11 +25,11 @@ class Course extends AbstractModel
             for ($j = 1; $j <= $sNum; $j++) {
                 $sData = [
                     'course_id' => $this->id,
-                    'section_id' => $this->id,
+                    'section_id' => $cInfo['id'],
                     'orderlist' => $j,
-                    'name' => "第{$j}节 {$this->name}",
+                    'name' => "第{$j}节 {$this->name}-{$cInfo['name']}",
                 ];
-                $cInfo = $this->getModelObj('lesson')->create($sData);
+                $lInfo = $this->getModelObj('lesson')->create($sData);
             }
         }
         return true;
