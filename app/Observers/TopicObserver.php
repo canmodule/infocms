@@ -8,7 +8,7 @@ use ModuleInfocms\Models\Topic;
 
 class TopicObserver
 {
-    public function created(Topic $model)
+    /*public function created(Topic $model)
     {
         $model->updateTagInfos(['tags' => [$model->code]]);
         return true;
@@ -29,5 +29,5 @@ class TopicObserver
     {
         $model->deleteTagInfos([]);
         return true;
-    }
+    }*/
 }

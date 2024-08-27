@@ -7,30 +7,7 @@ use Swoolecan\Foundation\Helpers\DatetimeTool;
 
 class FetchDataService extends AbstractService
 {
-    public function getSubjectInfos($params = [])
-    {
-        $query = $this->getModelObj('subject');
-        //$infos = $query->where($params)->get();
-        $infos = $query->get();
-        $results = [];
-        foreach ($infos as $info) {
-            $info->name = $info->name;
-            $results[] = $info->toArray();
-        }
-        return $results;
-    }
-
-    public function getGroupInfos($params = [])
-    {
-        $query = $this->getModelObj('group');
-        $infos = $query->where($params)->get();
-        $results = [];
-        foreach ($infos as $info) {
-            $info->name = $info->name;
-            $results[] = $info->toArray();
-        }
-        return $results;
-    }
+    use HistoryDataTrait;
 
     public function getBannerInfos($app, $position)
     {

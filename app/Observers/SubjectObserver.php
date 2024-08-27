@@ -16,24 +16,24 @@ class SubjectObserver
 
     public function created(Subject $model)
     {
-        $model->updateTagInfos(['tags' => [$model->code]]);
+        //$model->updateTagInfos(['tags' => [$model->code]]);
         return true;
     }
 
     public function creating(Subject $model)
     {
-        $code = $model->code;
+        /*$code = $model->code;
         $checkCode = $model->getCodeTag($code);
         if (empty($checkCode)) {
             $checkCode = $model->findCreateTag($code);
         }
-        $model->code = $checkCode;
+        $model->code = $checkCode;*/
         return true;
     }
 
     public function deleted(Subject $model)
     {
-        $model->deleteTagInfos([]);
+        //$model->deleteTagInfos([]);
         return true;
     }
 }

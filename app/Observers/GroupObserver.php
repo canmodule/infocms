@@ -8,7 +8,7 @@ use ModuleInfocms\Models\Group;
 
 class GroupObserver
 {
-    public function created(Group $model)
+    /*public function created(Group $model)
     {
         $model->updateTagInfos(['tags' => [$model->code]]);
         return true;
@@ -29,5 +29,5 @@ class GroupObserver
     {
         $model->deleteTagInfos([]);
         return true;
-    }
+    }*/
 }

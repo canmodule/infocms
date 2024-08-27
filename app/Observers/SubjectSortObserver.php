@@ -8,7 +8,7 @@ use ModuleInfocms\Models\SubjectSort;
 
 class SubjectSortObserver
 {
-    public function saved(SubjectSort $model)
+    /*public function saved(SubjectSort $model)
     {
         //$model->afterSave();
         return true;
@@ -35,5 +35,5 @@ class SubjectSortObserver
     {
         $model->deleteTagInfos([]);
         return true;
-    }
+    }*/
 }

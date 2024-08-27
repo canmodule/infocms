@@ -10,17 +10,20 @@ class Subject extends AbstractModel
     protected $primaryKey = 'code';
     public $incrementing = false;
 
-    public function getNameAttribute()
+    /*public function getNameAttribute()
     {
         return $this->formatTagDatas('string');
-    }
+    }*/
 
     public function getGroupCodeAttribute()
     {
         $infos = $this->getGroupDatas();
+        \Log::debug($infos);
         $str = '';
-        foreach ((array) $infos as $info) {
-            $str .= "{$info->groupInfo->name} ; ";
+        foreach ($infos as $info) {
+            if ($info->groupInfo) {
+                $str .= "{$info->groupInfo->name} ; ";
+            }
         }
         return trim($str, ' ; ');
     }
@@ -34,7 +37,6 @@ class Subject extends AbstractModel
     {
         $request = request();
         $groupCodes = $request->input('group_code');
-        \Log::debug('ssssubject-' . gettype($groupCodes));
         if (is_null($groupCodes)) {
             return true;
         }

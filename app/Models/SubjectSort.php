@@ -10,9 +10,9 @@ class SubjectSort extends AbstractModel
     protected $primaryKey = 'code';
     public $incrementing = false;
 
-    public function getNameAttribute()
+    /*public function getNameAttribute()
     {
         return $this->formatTagDatas('string');
-    }
+    }*/
 
 }
