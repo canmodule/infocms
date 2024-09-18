@@ -4,12 +4,11 @@ declare(strict_types = 1);
 
 namespace ModuleInfocms\Requests;
 
-class ProductRequest extends AbstractRequest
+class KnowledgeDetailRequest extends AbstractRequest
 {
     protected function _updateRule()
     {
         return [
-            'id' => ['bail', 'required', 'exists'],
         ];
     }
 
