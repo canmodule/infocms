@@ -7,7 +7,8 @@ use Swoolecan\Foundation\Helpers\DatetimeTool;
 
 class FetchDataService extends AbstractService
 {
-    use HistoryDataTrait;
+    use SubjectDataTrait;
+    use RecordTrait;
 
     public function getBannerInfos($app, $position)
     {

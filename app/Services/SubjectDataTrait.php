@@ -5,7 +5,7 @@ namespace ModuleInfocms\Services;
 
 use Swoolecan\Foundation\Helpers\DatetimeTool;
 
-trait HistoryDataTrait
+trait SubjectDataTrait
 {
     public function getFigureDetail($figureCode)
     {
