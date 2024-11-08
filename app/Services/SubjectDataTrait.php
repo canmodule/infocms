@@ -75,28 +75,6 @@ trait SubjectDataTrait
         return $detail;
     }
 
-    public function getSubjectInfos($subjectSort)
-    {
-        $infos = $this->getModelObj('subject')->where(['subject_sort' => $subjectSort])->orderBy('orderlist', 'desc')->get();;
-        $results = [];
-        foreach ($infos as $info) {
-            $data = $info->toArray();
-            $results[] = $data;
-        }
-        return $results;
-    }
-
-    public function getGroupInfos($subjectCode)
-    {
-        $infos = $this->getModelObj('groupSubject')->where(['subject_code' => $subjectCode])->orderBy('orderlist', 'desc')->get();;
-        $results = [];
-        foreach ($infos as $info) {
-            $data = $info->groupInfo->toArray();
-            $results[] = $data;
-        }
-        return $results;
-    }
-
     public function getRandBackground()
     {
         $num = [1, 2, 3, 4, 6][rand(0, 4)];
